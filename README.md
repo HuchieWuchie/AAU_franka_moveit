@@ -10,6 +10,12 @@ Robotics group
 
 This repository contains a general MoveIt package for the Franka Emika Panda used for visual reasoning at the AAU robotics lab. The package can then be run on a dedicated PC, used only for communicating with the Franka robot through MoveIt. Other ROS nodes can then communicate with the Franka PC through ROS interfaces.
 
+This readme file refers to 3 different pc's.
+
+Franka pc: The pc for which this code is intended to run. This pc needs to be connected with an ethernet cable to the Franka controller.
+Interface pc: A pc of any OS that is connected to the Franka robot ethernet port. This pc can acccess the control panel at robot.franka.de
+ROS pc: The pc for where all the other computations takes place such as visual reasoning, handover tasks, etc.
+
 ## 2. Installation of pre-requisties (Skip if you have the robolab pc):
 
 It is recommended to just use the Robolab pc, if that is not possible, then follow these installation instructions.
@@ -145,6 +151,8 @@ export ROS_MASTER_URI=http://172.31.1.150:11311
 ```
 
 ## 4. Usage
+
+For all of the usage case scenarios, remember to activate FCI on the Interface pc, by going to robot.franka.de and unlocking the motors, and then activating FCI.
 
 ### 4.1 Basic moveit package
 
