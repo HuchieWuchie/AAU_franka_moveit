@@ -144,29 +144,30 @@ export ROS_IP=172.31.1.150
 export ROS_MASTER_URI=http://172.31.1.150:11311
 ```
 
-Modify permission for the laser scanner
-```
-sudo chmod a+rw /dev/ttyACM0      # note that the usb port might change
-```
-
 ## 4. Usage
 
-launch roscore and launch file
+### 4.1 Basic moveit package
+
+Launch file, this brings up the basic moveit package
 ```
 source devel/setup.bash
-roscore
-roslaunch iiwa_noPtu_moveit moveit_planning_execution.launch
+roslaunch panda_arm_moveit_config bringup.launch
 ```
 
-Launch whatever experiement you want, chose between the ones listed below.
+### 4.2 Basic moveit package with moveit interface through code
+
+This package is meant to run on what we call the Franka pc. When you are running the RT patch, it is not possible to use the NVIDIA drivers, it is therefore not possible to run any neural networks. Those networks should be run on an external pc, which we call the ROS pc. The ROS pc can then interface with the Franka PC and thereby the MoveIT package through a ROS service called the moveit_service package included in this repository. The moveit_service provides some basic MoveIT functionality, and can be expanded as needed.
+
 ```
-rosrun rob10 final_test_observation.py
-rosrun rob10 final_test_rule.py
-rosrun rob10 orientation_test_observation.py # user study on orientation methods
-rosrun rob10 orientation_test_rule.py
-rosrun rob10 orientation_test_random.py
+roslaunch panda_arm_moveit_config bringup_moveit.launch
 ```
 
-In order to command the robot to pick up an object you must send a command to the rostopic /objects_affordances_id. The integer id corresponds to the object classes of AffNet-DR, eg. 1 (knife), 16 (mallet), etc.
+An example of how to use this service is provided in todo.py
 
-Note if you want to run the orientation_test_METHOD.py scripts you have to make use of precomputed information which can be found at: https://drive.google.com/file/d/1OhkOdDlKzmiacBYNIeN8ccKTg_f816GE/view?usp=sharing
+## 5. Further development and nice to know
+
+The workspace is described in the ws_description package. You can add additional sensors and environmental description in the ws_description/urdf/panda_arm_hand.urdf.xacro file.
+
+## 6. Trouble shooting
+
+Todo
