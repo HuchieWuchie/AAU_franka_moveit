@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<launch>
+
+  <include file="$(find panda_arm_moveit_config)/launch/bringup.launch"/>
+  <node name="moveit_service_node" pkg="moveit_service" type="moveit_service.py" required="true"/>
+
+</launch>

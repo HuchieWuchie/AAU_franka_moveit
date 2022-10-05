@@ -1,0 +1,292 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="panda">
+  <xacro:arg name="robot_name" default="panda"/>
+  <xacro:arg name="load_gripper" default="true"/>
+  <xacro:arg name="load_gazebo" default="false"/>
+  <xacro:arg name="use_gazebo_control" default="false"/>
+  <xacro:arg name="connected_to" default=""/> <!-- If using a different frame with ${connected_to} param, make sure 'world' frame exists in the TF tree -->
+
+  <xacro:include filename="$(find franka_panda_description)/robots/panda_arm.xacro"/>
+
+  <xacro:if value="$(arg load_gripper)">
+    <xacro:include filename="$(find franka_panda_description)/robots/hand.xacro"/>
+    <xacro:hand ns="panda" rpy="0 0 ${-pi/4}" xyz="0.0 0.0 0.005" connected_to="panda_link8"/>
+  </xacro:if>
+
+  <xacro:if value="$(arg load_gazebo)">
+    <xacro:include filename="$(find franka_panda_description)/robots/panda.gazebo.xacro"/>
+    <xacro:include filename="$(find franka_panda_description)/robots/panda.transmission.xacro"/>
+
+    <xacro:panda_arm in_gazebo="true"  connected_to="$(arg connected_to)"/>
+    <xacro:panda_gazebo robot_name="$(arg robot_name)" load_gripper="$(arg load_gripper)"/>
+    <xacro:panda_transmission robot_name="$(arg robot_name)" load_gripper="$(arg load_gripper)" use_gazebo_control="$(arg use_gazebo_control)"/>
+  </xacro:if>
+
+  <xacro:unless value="$(arg load_gazebo)">
+    <xacro:panda_arm />
+  </xacro:unless>
+
+  <!-- colors -->
+  <material name="aluminum_b">
+    <color rgba="0.5 0.5 0.5 0.5"/>
+  </material>
+
+  <material name="white">
+     <color rgba="1 1 1 1"/>
+  </material>
+
+  <material name="blue">
+     <color rgba="0 0 1 1"/>
+  </material>
+
+  <material name="black">
+     <color rgba="0 0 0 1"/>
+  </material>
+
+  <!-- camera mount-->
+  <link name="cam_mount_simplified">
+    <visual>
+      <geometry>
+        <box size="0.11 0.11 0.005"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.04 0 0"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.11 0.11 0.005"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.04 0.0 0"/>
+    </collision>
+  </link>
+
+  <joint name="cam_mount_joint" type="fixed">
+    <parent link="panda_link8"/>
+    <child link="cam_mount_simplified"/>
+    <origin xyz="0 0.0 0.0" rpy="0 0 ${-pi/4}"/>
+  </joint>
+
+  <!-- camera robot-->
+
+  <link name="camera_robot_">
+    <visual>
+      <geometry>
+        <box size="0.03 0.09 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.063 0 0.0125"/>
+      <material name="white"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.03 0.09 0.025"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.063 0 0.0125"/>
+    </collision>
+  </link>
+
+  <joint name="camera_robot_joint" type="fixed">
+    <parent link="panda_link8"/>
+    <child link="camera_robot_"/>
+    <origin xyz="0 0.0 0.0" rpy="0 0 ${-pi/4}"/>
+  </joint>
+
+
+  <xacro:include filename="$(find ws_description)/urdf/_d435.urdf.xacro"/>
+  <xacro:sensor_d435 parent="camera_robot_" prefix="camera_robot_">
+    <origin xyz="0.063 0 0" rpy="0 0 0"/>
+  </xacro:sensor_d435>
+
+
+  <!-- WORK TABLE -->
+  <link name="table">
+    <visual>
+      <geometry>
+        <box size="0.985 0.408 0.85"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.267 -0.02 -0.435"/>
+      <material name="black"/>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.985 0.408 0.85"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0.267 -0.02 -0.435"/>
+    </collision>
+  </link>
+
+
+  <joint name="table_world_joint" type="fixed">
+    <parent link="world"/>
+    <child link="table"/>
+    <origin xyz="0 0 0.0" rpy="0 0 0"/>
+  </joint>
+
+
+
+    <!-- base Plate -->
+    <link name="base_plate">
+      <visual>
+        <geometry>
+          <box size="0.39 0.39 0.015"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.04 0.0095 -0.0075"/>
+        <material name="aluminum_b"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.39 0.39 0.015"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="-0.04 0.0095 -0.0075"/>
+      </collision>
+    </link>
+
+    <joint name="base_plate_world_joint" type="fixed">
+      <parent link="world"/>
+      <child link="base_plate"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- beam1 -->
+    <link name="beam1">
+      <visual>
+        <geometry>
+          <box size="0.08 0.08 1.1"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.718 0.142 0.53"/>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.08 0.08 1.1"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.718 0.142 0.53"/>
+      </collision>
+    </link>
+
+    <joint name="beam1_world_joint" type="fixed">
+      <parent link="world"/>
+      <child link="beam1"/>
+      <origin xyz="0 0.0 0" rpy="0 0 0"/>
+    </joint>
+
+
+
+    <link name="beam2">
+      <visual>
+        <geometry>
+          <box size="0.08 0.08 1.1"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.718 -0.182 0.53"/>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.08 0.08 1.1"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.718 -0.182 0.53"/>
+      </collision>
+    </link>
+
+    <joint name="beam2_world_joint" type="fixed">
+      <parent link="world"/>
+      <child link="beam2"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="beam3">
+      <visual>
+        <geometry>
+          <box size="0.18 0.48 0.18"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.730 0.0095 1.03"/>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.18 0.48 0.18"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0.730 0.0095 1.03"/>
+      </collision>
+    </link>
+
+    <joint name="beam3_world_joint" type="fixed">
+      <parent link="world"/>
+      <child link="beam3"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <!-- SCANNER  -->
+    <link name="laser">
+      <visual>
+        <geometry>
+          <box size="0.06 0.06 0.06"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.0"/>
+        <material name="aluminum_b"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.06 0.06 0.06"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      </collision>
+    </link>
+
+    <joint name="laser_scanner_joint" type="fixed">
+      <parent link="world"/>
+      <child link="laser"/>
+      <origin xyz="0.698 0.212 0.4" rpy="0 0 1.57079"/>
+    </joint> -->
+
+    <!-- microphone  -->
+    <link name="microphone">
+      <visual>
+        <geometry>
+          <box size="0.06 0.06 0.06"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.0"/>
+        <material name="aluminum_b"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.06 0.06 0.06"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0.0"/>
+      </collision>
+    </link>
+
+    <joint name="microphone_joint" type="fixed">
+      <parent link="world"/>
+      <child link="microphone"/>
+      <origin xyz="0.698 0.212 0.35" rpy="0 0 1.57079"/>
+    </joint> -->
+
+    <link name="camera_shelf_">
+      <visual>
+        <geometry>
+          <box size="0.03 0.09 0.025"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+        <material name="white"/>
+      </visual>
+      <collision>
+        <geometry>
+          <box size="0.03 0.09 0.025"/>
+        </geometry>
+        <origin rpy="0 0 0" xyz="0 0 0"/>
+      </collision>
+    </link>
+
+    <joint name="camera_shelf_joint" type="fixed">
+      <parent link="world"/>
+      <child link="camera_shelf_"/>
+      <origin xyz="0.698 -0.242 0.65" rpy="0 0 ${-pi/2}"/>
+    </joint>
+
+    <xacro:include filename="$(find ws_description)/urdf/_d455.urdf.xacro"/>
+    <xacro:sensor_d435 parent="camera_shelf_" prefix="camera_shelf_">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+    </xacro:sensor_d435>
+
+
+</robot>
