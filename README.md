@@ -10,7 +10,7 @@ Robotics group
 
 This repository contains a general MoveIt package for the Franka Emika Panda used for visual reasoning at the AAU robotics lab. The package can then be run on a dedicated PC, used only for communicating with the Franka robot through MoveIt. Other ROS nodes can then communicate with the Franka PC through ROS interfaces.
 
-## Installation:
+## Installation of pre-requisties (Skip if you have the robolab pc):
 
 It is recommended to just use the Robolab pc, if that is not possible, then follow these installation instructions.
 
@@ -68,16 +68,42 @@ sudo dpkg -i libfranka*.deb
 
 ### Build franka_ros from source
 
+Setup the catkin workspace
 ```
+cd ~
+mkdir -p franka_ros/src && cd franka_ros
+source /opt/ros/melodic/setup.sh
+catkin_init_workspace src
 ```
 
+Clone franka_ros github repository
+```
+git clone --recursive https://github.com/frankaemika/franka_ros src/franka_ros
+```
+
+Change version to melodic
+```
+git checkout melodic-devel
+```
+
+Install missing dependencies
+```
+rosdep install --from-paths src --ignore-src --rosdistro melodic -y --skip-keys libfranka
+catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/build
+source devel/setup.sh
+```
+
+### Install real-time patch
+
+Setup a workspace
+```
+cd ~
+mkdir rt_patch && cd rt_patch
+```
+
+Follow the instructions from here and install the RT patch for kernel version 5.4.19. Other patches might work as well, but bugs and problems have been encountered.
 
 
-```
-realsense2
-PCL (point cloud library)
-OpenCV
-```
 
 Python 3.6.9
 ```
