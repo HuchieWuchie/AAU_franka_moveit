@@ -179,3 +179,12 @@ The workspace is described in the ws_description package. You can add additional
 ## 6. Trouble shooting
 
 Todo
+
+### 6.1 Reflex mode
+
+bringup_moveit.launch or bringup.launch launches successfully, but the robot wont move, even though the planning works.
+
+Check if you get the following error in the terminal:
+
+"libfranka move command rejected: command not possible in the current mode ("Reflex")"
+- If so, shut down the roscore, press down and unpress the Franka activation button, then restart ROS.
