@@ -2,6 +2,6 @@
 <launch>
 
   <include file="$(find panda_arm_moveit_config)/launch/bringup.launch"/>
-  <node name="moveit_service_node" pkg="moveit_service" type="moveit_service.py" required="true"/>
+  <node name="moveit_service_node" pkg="fh_moveit_service" type="moveit_service.py" required="true" output="screen"/>
 
 </launch>

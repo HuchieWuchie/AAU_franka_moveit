@@ -104,7 +104,9 @@ Follow the instructions from here and install the RT patch for kernel version 5.
 ## 3. Install the AAU_franka_moveit repository
 
 
-### 3.1 Install ROS packages:
+### 3.1 Install packages:
+
+#### ROS packages:
 
 ```
 sudo apt install ros-melodic-moveit
@@ -112,9 +114,16 @@ sudo apt install ros-melodic-panda-moveit-config
 sudo apt install ros-melodic-realsense2-description
 ```
 
+#### Other packages:
+
+```
+sudo apt install python3-pip
+```
+
 ### 3.2 Install python packages:
 
 ```
+pip3 install rospkg
 ```
 
 ### 3.3 Setup the ros workspace
@@ -137,18 +146,37 @@ source devel/setup.bash
 
 ### 3.4 Setup the Franka pc (the one you installed all of this on):
 
-Connect an ethernet cable between the Franka pc and the Franka controller (not the actual robot). Setup the network configuration on your ROS pc to the following:
+Connect an ethernet cable from the Franka pc and to a switch.
+Connect an ethernet cable from the switch to the Franka controller (not the actual robot).
 
 ```
 IP: 172.16.0.1
 Netmask: 255.255.255.0
 ```
 
-Export ros settings (TODO), still old IIWA stuff
+Export ros settings
 ```
-export ROS_IP=172.31.1.150
-export ROS_MASTER_URI=http://172.31.1.150:11311
+export ROS_IP=172.16.0.1
+export ROS_MASTER_URI=http://172.16.0.1:11311
 ```
+
+### 3.5 Setup the ROS pc (the one you will be running your neural networks on):
+
+
+Connect an ethernet cable from the ROS pc and to the switch
+
+```
+IP: 172.16.0.3
+Netmask: 255.255.255.0
+```
+
+Export ros settings
+```
+export ROS_IP=172.16.0.3
+export ROS_MASTER_URI=http://172.16.0.1:11311
+```
+
+### 3.6 Setup the Interface pc (TODO):
 
 ## 4. Usage
 
@@ -170,7 +198,12 @@ This package is meant to run on what we call the Franka pc. When you are running
 roslaunch panda_arm_moveit_config bringup_moveit.launch
 ```
 
-An example of how to use this service is provided in todo.py
+An example of how to use this service is provided in usage_example.py run it by
+
+```
+roslaunch fh_moveit_service usage_example.py
+```
+
 
 ## 5. Further development and nice to know
 
