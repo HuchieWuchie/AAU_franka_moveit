@@ -78,7 +78,7 @@ def _getRobotStateAtPose(pose_msg):
     start_pose_msg.pose = pose_msg
 
     ik_request_msg = moveit_msgs.msg.PositionIKRequest()
-    ik_request_msg.group_name = "manipulator"
+    ik_request_msg.group_name = "panda_arm"
     ik_request_msg.robot_state = initial_state
     ik_request_msg.avoid_collisions = True #False
     ik_request_msg.pose_stamped = start_pose_msg
@@ -143,7 +143,7 @@ def _getInverseKinematicsSolution(initial_state,
     goal_pose_msg.pose = goal_pose
 
     ik_request_msg = moveit_msgs.msg.PositionIKRequest()
-    ik_request_msg.group_name = "manipulator"
+    ik_request_msg.group_name = "panda_arm"
     ik_request_msg.robot_state = initial_state
     ik_request_msg.avoid_collisions = False #False
     ik_request_msg.pose_stamped = goal_pose_msg
@@ -275,13 +275,13 @@ def getCurrentState(req):
 def getJointPositionAtNamed(req):
     target_values = move_group.get_named_target_values(req.target.data)
     resp = moveitGetJointPositionAtNamedResponse()
-    resp.joint_position.data.append(target_values["panda_joint_1"])
-    resp.joint_position.data.append(target_values["panda_joint_2"])
-    resp.joint_position.data.append(target_values["panda_joint_3"])
-    resp.joint_position.data.append(target_values["panda_joint_4"])
-    resp.joint_position.data.append(target_values["panda_joint_5"])
-    resp.joint_position.data.append(target_values["panda_joint_6"])
-    resp.joint_position.data.append(target_values["panda_joint_7"])
+    resp.joint_position.data.append(target_values["panda_joint1"])
+    resp.joint_position.data.append(target_values["panda_joint2"])
+    resp.joint_position.data.append(target_values["panda_joint3"])
+    resp.joint_position.data.append(target_values["panda_joint4"])
+    resp.joint_position.data.append(target_values["panda_joint5"])
+    resp.joint_position.data.append(target_values["panda_joint6"])
+    resp.joint_position.data.append(target_values["panda_joint7"])
     return resp
 
 def setMaxAccelerationScalingFactor(req):

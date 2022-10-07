@@ -77,7 +77,7 @@ def getRobotStateAtPose(pose_msg: geometry_msgs.msg.Pose):
     start_pose_msg.pose = pose_msg
 
     ik_request_msg = moveit_msgs.msg.PositionIKRequest()
-    ik_request_msg.group_name = "manipulator"
+    ik_request_msg.group_name = "panda_arm"
     ik_request_msg.robot_state = initial_state
     ik_request_msg.avoid_collisions = True #False
     ik_request_msg.pose_stamped = start_pose_msg
@@ -202,7 +202,7 @@ def getInverseKinematicsSolution(initial_state: moveit_msgs.msg.PositionIKReques
     goal_pose_msg.pose = goal_pose
 
     ik_request_msg = moveit_msgs.msg.PositionIKRequest()
-    ik_request_msg.group_name = "manipulator"
+    ik_request_msg.group_name = "panda_arm"
     ik_request_msg.robot_state = initial_state
     ik_request_msg.avoid_collisions = False #False
     ik_request_msg.pose_stamped = goal_pose_msg
@@ -228,7 +228,7 @@ def planToPose(goal_pose: geometry_msgs.msg.Pose):
     rospy.wait_for_service("/fh_handover/moveit/plan_to_pose")
     service = rospy.ServiceProxy("/fh_handover/moveit/plan_to_pose", moveitPlanToPoseSrv)
 
-    response = service(pose)
+    response = service(goal_pose)
     return response.success, response.plan
 
 def getJointPositionAtNamed(target: str) -> list:
@@ -240,18 +240,3 @@ def getJointPositionAtNamed(target: str) -> list:
     response = service(msg)
 
     return response
-
-
-if __name__ == "__main__":
-
-    rospy.init_node('aau_moveit_usage_example', anonymous=True)
-
-    print(getCurrentState())
-
-    gripperClose()
-    gripperOpen()
-
-    moveToNamed("ready")
-    moveToNamed("camera_ready_1")
-    moveToNamed("ready")
-    moveToNamed("home")
