@@ -17,6 +17,8 @@
         <joint name="panda_joint5" />
         <joint name="panda_joint6" />
         <joint name="panda_joint7" />
+        <joint name="panda_joint8" />
+        <joint name="panda_arm_ee" />        
     </group>
     <group name="panda_hand">
         <joint name="panda_finger_joint1" />

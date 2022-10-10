@@ -87,14 +87,29 @@
   <joint name="camera_robot_joint" type="fixed">
     <parent link="panda_link8"/>
     <child link="camera_robot_"/>
-    <origin xyz="0 0.0 0.0" rpy="0 0 ${-pi/4}"/>
+    <origin xyz="0 0.0 0.0" rpy="0 0 ${-pi/4}"/> <!-- rpy= "0 0 ${-pi/4}" -->
   </joint>
 
 
   <xacro:include filename="$(find ws_description)/urdf/_d435.urdf.xacro"/>
   <xacro:sensor_d435 parent="camera_robot_" prefix="camera_robot_">
-    <origin xyz="0.063 0 0" rpy="0 0 0"/>
+    <origin xyz="0.063 0 0.0125" rpy="0 ${-pi/2} ${pi}"/>
   </xacro:sensor_d435>
+
+  <link name="panda_arm_ee_link">
+    <visual>
+      <geometry>
+        <box size="0 0 0"/>
+      </geometry>
+      <origin xyz = "0 0 0" rpy = "0 0 0"/>
+    </visual>
+  </link>
+
+  <joint name="panda_arm_ee" type="fixed">
+    <parent link="panda_link8"/>
+    <child link="panda_arm_ee_link"/>
+    <origin xyz="0 0.0 0.1034" rpy="0 0 ${-pi/4}"/> <!-- rpy= "0 0 ${-pi/4}" -->
+  </joint>
 
 
   <!-- WORK TABLE -->

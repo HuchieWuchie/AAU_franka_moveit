@@ -119,7 +119,7 @@ def planFromPoseToPose(req):
         return response
 
     joint_states_at_goal = list(goal_state.solution.joint_state.position)
-    joint_values_at_goal = copy.deepcopy(joint_states_at_goal[2:9])
+    joint_values_at_goal = copy.deepcopy(joint_states_at_goal[:7])
     robot.set_start_state(start_state)
     robot.set_joint_value_target(joint_values_at_goal)
     trajectory = robot.plan()
@@ -176,13 +176,14 @@ def planToPose(req):
         return response
 
     joint_states_at_goal = list(goal_state.solution.joint_state.position)
-    joint_values_at_goal = copy.deepcopy(joint_states_at_goal[2:9])
+    joint_values_at_goal = copy.deepcopy(joint_states_at_goal[:7])
+
     robot.set_start_state(start_state)
     robot.set_joint_value_target(joint_values_at_goal)
     trajectory = robot.plan()
 
     response = moveitPlanToPoseSrvResponse()
-    response.plan = plan
+    response.plan = trajectory
     response.success = Bool(True)
 
     return response
