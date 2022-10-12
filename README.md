@@ -13,7 +13,9 @@ This repository contains a general MoveIt package for the Franka Emika Panda use
 This readme file refers to 3 different pc's.
 
 Franka pc: The pc for which this code is intended to run. This pc needs to be connected with an ethernet cable to the Franka controller.
+
 Interface pc: A pc of any OS that is connected to the Franka robot ethernet port. This pc can acccess the control panel at robot.franka.de
+
 ROS pc: The pc for where all the other computations takes place such as visual reasoning, handover tasks, etc.
 
 ## 2. Installation of pre-requisties (Skip if you have the robolab pc):
