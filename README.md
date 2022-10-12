@@ -18,9 +18,10 @@ Interface pc: A pc of any OS that is connected to the Franka robot ethernet port
 
 ROS pc: The pc for where all the other computations takes place such as visual reasoning, handover tasks, etc.
 
-## 2. Installation of pre-requisties (Skip if you have the robolab pc):
+## 2. Installation of pre-requisties on the Franka pc (Skip if you have the robolab pc):
 
 It is recommended to just use the Robolab pc, if that is not possible, then follow these installation instructions.
+These instructions are for installing the neccessary packages on the Franka pc, NOT the ROS pc.
 
 ### 2.1 General system requirements:
 ```
@@ -105,6 +106,7 @@ Follow the instructions from here and install the RT patch for kernel version 5.
 
 ## 3. Install the AAU_franka_moveit repository
 
+This step should be done on BOTH the Franka pc AND the ROS pc.
 
 ### 3.1 Install packages:
 
@@ -184,7 +186,7 @@ export ROS_MASTER_URI=http://172.16.0.1:11311
 
 For all of the usage case scenarios, remember to activate FCI on the Interface pc, by going to robot.franka.de and unlocking the motors, and then activating FCI.
 
-### 4.1 Basic moveit package
+### 4.1 Basic moveit package, Franka pc
 
 Launch file, this brings up the basic moveit package
 ```
@@ -194,7 +196,7 @@ roslaunch panda_arm_moveit_config bringup.launch
 
 ### 4.2 Basic moveit package with moveit interface through code
 
-This package is meant to run on what we call the Franka pc. When you are running the RT patch, it is not possible to use the NVIDIA drivers, it is therefore not possible to run any neural networks. Those networks should be run on an external pc, which we call the ROS pc. The ROS pc can then interface with the Franka PC and thereby the MoveIT package through a ROS service called the moveit_service package included in this repository. The moveit_service provides some basic MoveIT functionality, and can be expanded as needed.
+This package is meant to run on what we call the Franka pc. When you are running the RT patch, it is not possible to use NVIDIA drivers, it is therefore not possible to run any neural networks. Those networks should be run on an external pc, which we call the ROS pc. The ROS pc can then interface with the Franka PC and thereby the MoveIT package through a ROS service called the moveit_service package included in this repository. The moveit_service provides some basic MoveIT functionality, and can be expanded as needed.
 
 ```
 roslaunch panda_arm_moveit_config bringup_moveit.launch
