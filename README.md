@@ -26,22 +26,22 @@ The Franka robot, the 3 PCs and sensors needs to be connected as shown in the fi
 
 ![alt text](figs/franka_setup.png)
 
-## 2.1  (Franka pc)Installation of pre-requisties on the Franka pc (Skip if you have the robolab pc):
+## 2.1 (Franka pc) Installation of pre-requisties on the Franka pc (Skip if you have the robolab pc):
 
 The Franka robot requires a real-time kernel patch in order to communicate with any ROS setup. An installation instruction for a dedicated "Franka" pc is therefore given in section 2.1. It is recommended to just use the Robolab pc, if that is not possible, then follow these installation instructions.
 These instructions are for installing the neccessary packages on the Franka pc, **NOT** the ROS pc.
 
-### 2.1.1 General system requirements (Franka pc):
+### (Franka pc) 2.1.1 General system requirements:
 ```
 PC with ethernet port
 Ubuntu 18.04 with real-time patch, instructions for how to install RT patch follows later
 ```
 
-### 2.1.2 Install ROS melodic (Franka pc):
+### 2.1.2 (Franka pc) Install ROS melodic:
 
 Follow the instructions for how to install ros melodic here: http://wiki.ros.org/melodic/Installation/Ubuntu
 
-### 2.1.3 Build libfranka from source (Franka pc):
+### 2.1.3 (Franka pc) Build libfranka from source:
 
 The instructions are taken from here: https://frankaemika.github.io/docs/installation_linux.html
 Build libfranka from source, do not use the binary
@@ -75,7 +75,7 @@ cpack -G DEB
 sudo dpkg -i libfranka*.deb
 ```
 
-### 2.1.4 Build franka_ros from source (Franka pc)
+### 2.1.4 (Franka pc) Build franka_ros from source:
 
 Setup the catkin workspace
 ```
@@ -102,7 +102,7 @@ catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/buil
 source devel/setup.sh
 ```
 
-### 2.1.5 Install real-time patch (Franka pc)
+### 2.1.5 (Franka pc) Install real-time patch:
 
 Setup a workspace
 ```
@@ -112,11 +112,11 @@ mkdir rt_patch && cd rt_patch
 
 Follow the instructions from here and install the RT patch for kernel version 5.4.19. Other patches might work as well, but bugs and problems have been encountered.
 
-## 2.2. Install the AAU_franka_moveit repository (Franka pc)
+## 2.2. (Franka pc) Install the AAU_franka_moveit repository:
 
 After having installed the pre-requisites on the Franka pc, the moveit package given in this repository needs to be installed. Notice this package also needs to be installed on the ROS pc since it contains some service messages that is required for communicating between the Franka and ROS pc, but that is described further later on.
 
-### 2.2.1 Install packages (Franka pc):
+### 2.2.1 (Franka pc) Install packages:
 
 Install the following ros packages.
 
@@ -140,7 +140,7 @@ sudo apt install python3-pip
 pip3 install rospkg
 ```
 
-### 2.2.2 Setup the ros workspace (Franka pc)
+### 2.2.2 (Franka pc) Setup the ros workspace:
 
 ```
 cd ~
@@ -158,9 +158,29 @@ catkin_make
 source devel/setup.bash
 ```
 
-## 2.3 Setup the ROS pc
+## 2.3 (ROS pc) Setup the ROS pc:
 
-### 2.2.3 Setup the Franka pc (the one you installed all of this on):
+This repository only contain the moveit package for basic robot control, you will need another package to do something meaningful with the robot, as an inspiration you can use the franka handover package:
+
+https://github.com/HuchieWuchie/franka_handover
+
+## 2.4 (Interface pc) Setup the interface pc:
+
+You do not need to do anything.
+
+# 3. Usage
+
+## 3.1 (Interface pc):
+
+For all of the usage case scenarios, remember to activate FCI on the Interface pc, by going to robot.franka.de and unlocking the motors, and then activating FCI.
+
+[Read more here](https://frankaemika.github.io/docs/getting_started.html)
+
+## 3.2 Setup the ROS master and IPs:
+
+The only purpose of the Franka pc is to run the moveit package for basic robot controls, you will therefore most like only launch a ROS launch file on the Franka pc. The rest of the computations will be done on the ROS pc, we therefore need to setup the ROS master on the Franka pc and allow the ROS pc to communicate with the ROS master.
+
+### 3.2.1 (Franka pc):
 
 Connect an ethernet cable from the Franka pc and to a switch.
 Connect an ethernet cable from the switch to the Franka controller (not the actual robot).
@@ -170,14 +190,13 @@ IP: 172.16.0.1
 Netmask: 255.255.255.0
 ```
 
-Export ros settings
+Export ROS settings
 ```
 export ROS_IP=172.16.0.1
 export ROS_MASTER_URI=http://172.16.0.1:11311
 ```
 
-### 3.5 Setup the ROS pc (the one you will be running your neural networks on):
-
+### 3.2.2 (ROS pc):
 
 Connect an ethernet cable from the ROS pc and to the switch
 
@@ -186,55 +205,56 @@ IP: 172.16.0.3
 Netmask: 255.255.255.0
 ```
 
-Export ros settings
+Export ROS settings
 ```
 export ROS_IP=172.16.0.3
 export ROS_MASTER_URI=http://172.16.0.1:11311
 ```
 
-### 3.6 Setup the Interface pc (TODO):
+## 3.3 (Franka PC) Basic moveit package
 
-## 4. Usage
+Launch file, this brings up the basic moveit package, you can move the end-effector around the the RVIZ GUI:
 
-For all of the usage case scenarios, remember to activate FCI on the Interface pc, by going to robot.franka.de and unlocking the motors, and then activating FCI.
-
-### 4.1 Basic moveit package, Franka pc
-
-Launch file, this brings up the basic moveit package
 ```
 source devel/setup.bash
 roslaunch panda_arm_moveit_config bringup.launch
 ```
 
-### 4.2 Basic moveit package with moveit interface through code
+### 3.4 Basic moveit package with moveit interface through code
 
 This package is meant to run on what we call the Franka pc. When you are running the RT patch, it is not possible to use NVIDIA drivers, it is therefore not possible to run any neural networks. Those networks should be run on an external pc, which we call the ROS pc. The ROS pc can then interface with the Franka PC and thereby the MoveIT package through a ROS service called the moveit_service package included in this repository. The moveit_service provides some basic MoveIT functionality, and can be expanded as needed.
+
+**(Franka PC)**
 
 ```
 roslaunch panda_arm_moveit_config bringup_moveit.launch
 ```
 
-An example of how to use this service is provided in usage_example.py run it by
+**(Franka PC or ROS PC)**
+
+An example of how to move and control the Franka robot useing this service is provided in usage_example.py run it by, this node can be run from either the ROS pc or the Franka PC.
 
 ```
 roslaunch fh_moveit_service usage_example.py
 ```
 
-## 5. Controlling the Franka robot from the ROS pc
 
-This is todo, I will write it later.
-But it is basicly just calling the various moveit services.
-
-
-## 6. Further development and nice to know
+# 4. Further development and nice to know
 
 The workspace is described in the ws_description package. You can add additional sensors and environmental description in the ws_description/urdf/panda_arm_hand.urdf.xacro file.
 
-## 7. Trouble shooting
+## 4.1 
+
+More general nice to information can be found here:
+
+https://frankaemika.github.io/docs/overview.html
+https://frankaemika.github.io/docs/libfranka.html
+
+# 5. Trouble shooting
 
 Todo
 
-### 7.1 Reflex mode
+## 5.1 Reflex mode
 
 bringup_moveit.launch or bringup.launch launches successfully, but the robot wont move, even though the planning works.
 
@@ -243,7 +263,7 @@ Check if you get the following error in the terminal:
 "libfranka move command rejected: command not possible in the current mode ("Reflex")"
 - If so, shut down the roscore, press down and unpress the Franka activation button, then restart ROS.
 
-### 7.2 Goal tolerance violated
+## 5.2 Goal tolerance violated
 
 The robot does not execute any trajectories generated by moveit for whatever reason:
 
