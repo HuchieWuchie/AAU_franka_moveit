@@ -6,11 +6,13 @@ Aalborg University (2022)
 
 Robotics group
 
-## 1. Description
+# 1. Description
 
 This repository contains a general MoveIt package for the Franka Emika Panda used for visual reasoning at the AAU robotics lab. The package can then be run on a dedicated PC, used only for communicating with the Franka robot through MoveIt. Other ROS nodes can then communicate with the Franka PC through ROS interfaces.
 
-## 2. Hardware setup
+# 2. Hardware setup
+
+Section 2. describes how to connect all the various hardware and how to install the required software.
 
 This readme file refers to 3 different pc's.
 
@@ -24,22 +26,22 @@ The Franka robot, the 3 PCs and sensors needs to be connected as shown in the fi
 
 ![alt text](figs/franka_setup.png)
 
-## 2. Installation of pre-requisties on the Franka pc (Skip if you have the robolab pc):
+## 2.1  (Franka pc)Installation of pre-requisties on the Franka pc (Skip if you have the robolab pc):
 
-It is recommended to just use the Robolab pc, if that is not possible, then follow these installation instructions.
-These instructions are for installing the neccessary packages on the Franka pc, NOT the ROS pc.
+The Franka robot requires a real-time kernel patch in order to communicate with any ROS setup. An installation instruction for a dedicated "Franka" pc is therefore given in section 2.1. It is recommended to just use the Robolab pc, if that is not possible, then follow these installation instructions.
+These instructions are for installing the neccessary packages on the Franka pc, **NOT** the ROS pc.
 
-### 2.1 General system requirements:
+### 2.1.1 General system requirements (Franka pc):
 ```
 PC with ethernet port
 Ubuntu 18.04 with real-time patch, instructions for how to install RT patch follows later
 ```
 
-### 2.2 Install ROS melodic:
+### 2.1.2 Install ROS melodic (Franka pc):
 
 Follow the instructions for how to install ros melodic here: http://wiki.ros.org/melodic/Installation/Ubuntu
 
-### 2.3 Build libfranka from source:
+### 2.1.3 Build libfranka from source (Franka pc):
 
 The instructions are taken from here: https://frankaemika.github.io/docs/installation_linux.html
 Build libfranka from source, do not use the binary
@@ -73,7 +75,7 @@ cpack -G DEB
 sudo dpkg -i libfranka*.deb
 ```
 
-### 2.4 Build franka_ros from source
+### 2.1.4 Build franka_ros from source (Franka pc)
 
 Setup the catkin workspace
 ```
@@ -100,7 +102,7 @@ catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/buil
 source devel/setup.sh
 ```
 
-### 2.5 Install real-time patch
+### 2.1.5 Install real-time patch (Franka pc)
 
 Setup a workspace
 ```
@@ -110,11 +112,13 @@ mkdir rt_patch && cd rt_patch
 
 Follow the instructions from here and install the RT patch for kernel version 5.4.19. Other patches might work as well, but bugs and problems have been encountered.
 
-## 3. Install the AAU_franka_moveit repository
+## 2.2. Install the AAU_franka_moveit repository (Franka pc)
 
-This step should be done on BOTH the Franka pc AND the ROS pc.
+After having installed the pre-requisites on the Franka pc, the moveit package given in this repository needs to be installed. Notice this package also needs to be installed on the ROS pc since it contains some service messages that is required for communicating between the Franka and ROS pc, but that is described further later on.
 
-### 3.1 Install packages:
+### 2.2.1 Install packages (Franka pc):
+
+Install the following ros packages.
 
 #### ROS packages:
 
@@ -130,13 +134,13 @@ sudo apt install ros-melodic-realsense2-description
 sudo apt install python3-pip
 ```
 
-### 3.2 Install python packages:
+### Python packages:
 
 ```
 pip3 install rospkg
 ```
 
-### 3.3 Setup the ros workspace
+### 2.2.2 Setup the ros workspace (Franka pc)
 
 ```
 cd ~
@@ -154,7 +158,9 @@ catkin_make
 source devel/setup.bash
 ```
 
-### 3.4 Setup the Franka pc (the one you installed all of this on):
+## 2.3 Setup the ROS pc
+
+### 2.2.3 Setup the Franka pc (the one you installed all of this on):
 
 Connect an ethernet cable from the Franka pc and to a switch.
 Connect an ethernet cable from the switch to the Franka controller (not the actual robot).
