@@ -18,7 +18,7 @@ Interface pc: A pc of any OS that is connected to the Franka robot ethernet port
 
 ROS pc: The pc for where all the other computations takes place such as visual reasoning, handover tasks, etc.
 
-![alt text](figs/franka_setup.pdf)
+![alt text](/figs/franka_setup.pdf)
 
 ## 2. Installation of pre-requisties on the Franka pc (Skip if you have the robolab pc):
 
