@@ -220,7 +220,7 @@ source devel/setup.bash
 roslaunch panda_arm_moveit_config bringup.launch
 ```
 
-### 3.4 Basic moveit package with moveit interface through code
+## 3.4 Basic movement of robot through moveit package through code
 
 This package is meant to run on what we call the Franka pc. When you are running the RT patch, it is not possible to use NVIDIA drivers, it is therefore not possible to run any neural networks. Those networks should be run on an external pc, which we call the ROS pc. The ROS pc can then interface with the Franka PC and thereby the MoveIT package through a ROS service called the moveit_service package included in this repository. The moveit_service provides some basic MoveIT functionality, and can be expanded as needed.
 
@@ -238,6 +238,61 @@ An example of how to move and control the Franka robot useing this service is pr
 roslaunch fh_moveit_service usage_example.py
 ```
 
+## 3.5 How to use sensors
+
+The URDF describes 3 sensors:
+
+An intel realsense d435 mounted on the robot gripper
+
+An intel realsense d455 mounted on the metal frame
+
+A Lidar scanner mounted on the metal frame
+
+This section describes how to interface with the various sensors
+
+**(Franka PC)**
+
+On the Franka pc run the following:
+
+```
+roslaunch panda_arm_moveit_config bringup_moveit.launch
+```
+
+**(ROS PC)**
+
+Code and ROS services for interfacing the various sensors can be found at https://github.com/HuchieWuchie/franka_handover
+
+## 3.6 How to grasp
+
+This section shows how grasps can be generated through sensor readings and how they can be executed on the physical Franka robot.
+
+**(Franka PC)**
+
+On the Franka pc run the following:
+
+```
+roslaunch panda_arm_moveit_config bringup_moveit.launch
+```
+
+**(ROS PC)**
+
+Code and ROS services for generating and executing grasps can be found at https://github.com/HuchieWuchie/franka_handover
+
+## 3.7 How to perform a handover
+
+This section shows how task-oriented grasps can be generated through sensor readings and how they can be executed on the physical Franka robot, as well as locating the receiver and moving the handover object to the receiver.
+
+**(Franka PC)**
+
+On the Franka pc run the following:
+
+```
+roslaunch panda_arm_moveit_config bringup_moveit.launch
+```
+
+**(ROS PC)**
+
+Code and ROS services for performing a handover can be found at https://github.com/HuchieWuchie/franka_handover
 
 # 4. Further development and nice to know
 
