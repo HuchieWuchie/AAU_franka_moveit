@@ -235,7 +235,7 @@ roslaunch panda_arm_moveit_config aau_bringup.launch
 An example of how to move and control the Franka robot useing this service is provided in usage_example.py run it by, this node can be run from either the ROS pc or the Franka PC.
 
 ```
-roslaunch fh_moveit_service usage_example.py
+rosrun fh_moveit_service usage_example.py
 ```
 
 ## 3.5 How to use sensors
@@ -255,7 +255,7 @@ This section describes how to interface with the various sensors
 On the Franka pc run the following:
 
 ```
-roslaunch panda_arm_moveit_config bringup_moveit.launch
+roslaunch panda_arm_moveit_config aau_bringup.launch
 ```
 
 **(ROS PC)**
@@ -271,7 +271,7 @@ This section shows how grasps can be generated through sensor readings and how t
 On the Franka pc run the following:
 
 ```
-roslaunch panda_arm_moveit_config bringup_moveit.launch
+roslaunch panda_arm_moveit_config aau_bringup.launch
 ```
 
 **(ROS PC)**
@@ -287,7 +287,7 @@ This section shows how task-oriented grasps can be generated through sensor read
 On the Franka pc run the following:
 
 ```
-roslaunch panda_arm_moveit_config bringup_moveit.launch
+roslaunch panda_arm_moveit_config aau_bringup.launch
 ```
 
 **(ROS PC)**
