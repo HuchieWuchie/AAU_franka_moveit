@@ -195,7 +195,7 @@ roslaunch panda_arm_moveit_config bringup.launch
 This package is meant to run on what we call the Franka pc. When you are running the RT patch, it is not possible to use the NVIDIA drivers, it is therefore not possible to run any neural networks. Those networks should be run on an external pc, which we call the ROS pc. The ROS pc can then interface with the Franka PC and thereby the MoveIT package through a ROS service called the moveit_service package included in this repository. The moveit_service provides some basic MoveIT functionality, and can be expanded as needed.
 
 ```
-roslaunch panda_arm_moveit_config bringup_moveit.launch
+roslaunch panda_arm_moveit_config aau_bringup.launch
 ```
 
 An example of how to use this service is provided in usage_example.py run it by
