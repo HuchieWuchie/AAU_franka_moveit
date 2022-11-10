@@ -1,6 +1,18 @@
 Overview
 ===================================
 
+Contents
+--------
+
+.. toctree::
+
+   index
+   usage
+   api
+
+Introduction
+--------
+
 Welcome to the **AAU Franka** documentation. This documentation covers explains
 how to get started with the Franka development platform at AAU. The code base is
 meant to be run across several PCs. We define 3 PCs.
@@ -13,11 +25,13 @@ meant to be run across several PCs. We define 3 PCs.
 
 An overview of the 3 PCs and how they are connected can be seen in the figure below:
 
-.. image:: path/franka_setup.png
+.. image:: images/franka_setup.png
   :width: 400
   :alt: Alternative text
 
-repositories listed below:
+As can be seen from the image above, the setup requires communication to happend
+between several PCs, therefore, two github repositories has been coded to allow
+for this setup:
 
 .. note::
 
@@ -25,7 +39,8 @@ repositories listed below:
    https://github.com/HuchieWuchie/franka_handover
 
 
-The **AAU_franka_moveit** repository is meant as a base for contains the following:
+The **AAU_franka_moveit** repository is meant as a base and will run on the
+**Franka PC**, it contains the following:
 
 .. code-block:: RST
 
@@ -33,7 +48,8 @@ The **AAU_franka_moveit** repository is meant as a base for contains the followi
     * A MoveIt implementation.
     * A ROS service that enables moveit commands to be sent from other PCs.
 
-
+The **franka_handover** repository is meant as a base and will run on the
+**Franka PC**, it contains the following:
 
 
 **Lumache** (/lu'make/) is a Python library for cooks and food lovers
@@ -47,12 +63,3 @@ how to :ref:`installation` the project.
 .. note::
 
    This project is under active development.
-
-Contents
---------
-
-.. toctree::
-
-   index
-   usage
-   api
