@@ -1,13 +1,27 @@
 Overview
 ===================================
 
-Welcome to the **AAU Franka** documentation. This documentation covers two
+Welcome to the **AAU Franka** documentation. This documentation covers explains
+how to get started with the Franka development platform at AAU. The code base is
+meant to be run across several PCs. We define 3 PCs.
+
+.. code-block:: RST
+
+    * Interface PC: A pc of any OS that is connected to the Franka robot ethernet port. This PC can acccess the control panel at robot.franka.de
+    * Franka PC: This PC runs MoveIt and is in charge of communicating with the Franka robot (hence the name).
+    * ROS PC: The PC for where all the other computations takes place such as visual reasoning, grasping, handover tasks, etc. This PC is also in charge of communicating with the sensors such as microphones, lidars, cameras, etc.
+
+An overview of the 3 PCs and how they are connected can be seen in the figure below:
+
+.. image:: path/franka_setup.png
+  :width: 400
+  :alt: Alternative text
+
 repositories listed below:
 
 .. note::
 
    https://github.com/HuchieWuchie/AAU_franka_moveit
-
    https://github.com/HuchieWuchie/franka_handover
 
 
