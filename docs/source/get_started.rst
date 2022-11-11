@@ -134,8 +134,7 @@ Install the AAU_franka_moveit repository:
 
 After having installed the pre-requisites on the Franka pc, the moveit package given in this repository needs to be installed. Notice this package also needs to be installed on the ROS pc since it contains some service messages that is required for communicating between the Franka and ROS pc, but that is described further later on.
 
-Install packages:
-********
+**Install packages:**
 
 Install the following ros packages.
 
@@ -157,24 +156,22 @@ Install the following python packges
 pip3 install rospkg
 ```
 
-Setup the ros workspace:
-***********
+**Setup the ros workspace:**
 
-```
-cd ~
-mkdir ros_ws
-mkdir ros_ws/src
-cd ros_ws/src
+.. code-block:: console
+    cd ~
+    mkdir ros_ws
+    mkdir ros_ws/src
+    cd ros_ws/src
 
-git clone --branch melodic-devel https://github.com/frankaemika/franka_ros.git
-git clone https://github.com/justagist/franka_panda_description.git
-git clone --branch v0.7.1-dev https://github.com/justagist/franka_ros_interface.git
-git clone https://github.com/HuchieWuchie/AAU_franka_moveit.git
+    git clone --branch melodic-devel https://github.com/frankaemika/franka_ros.git
+    git clone https://github.com/justagist/franka_panda_description.git
+    git clone --branch v0.7.1-dev https://github.com/justagist/franka_ros_interface.git
+    git clone https://github.com/HuchieWuchie/AAU_franka_moveit.git
 
-cd ..
-catkin_make
-source devel/setup.bash
-```
+    cd ..
+    catkin_make
+    source devel/setup.bash
 
 
 
