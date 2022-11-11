@@ -15,8 +15,7 @@ From the ``AAU_franka_moveit`` repository::
 
     **panda_arm_moveit_config** # MoveIt configuration of the workspace
     **ws_description** # Used by MoveIt to describe the physical workspace
-    **moveitService** # Used to send goal poses for the robot from the ROS PC to the 
-    MoveIt package on the Franka PC. 
+    **moveitService** # Used to send goal poses for the robot from the ROS PC to the MoveIt package on the Franka PC. 
 
 Description
 ######
@@ -43,11 +42,11 @@ Step-by-step:
 Interface PC::
 *******
 
-.. codeblock::
+Perform the following steps on the Interface PC::
 
-   1. Connect to `robot.franka.de`
-   2. Unlock brakes
-   3. Activate FCI
+    1. Connect to `robot.franka.de`
+    2. Unlock brakes
+    3. Activate FCI
 
 Franka PC:
 *******
