@@ -40,7 +40,7 @@ accessing robot.franka.de from either Chrome or Firefox.
 You can access the robot with the following login information:
 
 .. note::
-    Username: Panda
+    | Username: Panda
     | Password: panda1234
 
 Franka PC: Installation
