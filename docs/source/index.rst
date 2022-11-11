@@ -26,7 +26,7 @@ meant to be run across several PCs. We define 3 PCs.
 An overview of the 3 PCs and how they are connected can be seen in the figure below:
 
 .. image:: images/franka_setup.png
-  :width: 400
+  :width: 800
   :alt: Alternative text
 
 As can be seen from the image above, the setup requires communication to happend
@@ -39,8 +39,9 @@ for this setup:
    https://github.com/HuchieWuchie/franka_handover
 
 
-The **AAU_franka_moveit** repository is meant as a base and will run on the
-**Franka PC**, it contains the following:
+The **AAU_franka_moveit** repository serves as a base that can compute 
+collision free trajectories and execute said trajectories. The repository
+is meant to run run on the **Franka PC**, it contains the following:
 
 .. code-block:: RST
 
@@ -48,18 +49,21 @@ The **AAU_franka_moveit** repository is meant as a base and will run on the
     * A MoveIt implementation.
     * A ROS service that enables moveit commands to be sent from other PCs.
 
-The **franka_handover** repository is meant as a base and will run on the
-**Franka PC**, it contains the following:
+The **franka_handover** repository contains a codebase for communicating with the
+sensors attached to the setup, it also contains code defining a set of skills such
+as object affordance detection and task-oriented grasping. The repository is meant 
+to be run on the **ROS PC**, it contains the following:
+
+.. code-block:: RST
+
+    * AffordanceAnalyzer (Object affordance prediction)
+    * fhUtils (Utility functions)
+    * fh_handover (Example scripts of how to use the repository)
+    * graspGenerator (Sample task-agnostic grasps)
+    * handoverLocation (Node for computing the x, y, z position of the receiver)
+    * handoverOrientation (Node for computing proper object orientation for handover task)
+    * sensors/camera (Utility node for communicating with intel Realsense sensors)
+
+The rest of the documentation covers how to install and use the codebase.
 
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
-
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
-
-.. note::
-
-   This project is under active development.
