@@ -4,8 +4,8 @@
 Needed equipment:
 #####
 
-    Franka PC
-    Interface PC
+    | Franka PC
+    | Interface PC
 
 Packages used
 #####
@@ -49,7 +49,7 @@ Perform the following steps on the Interface PC::
     2. Unlock brakes
     3. Activate FCI
 
-ROS PC:
+Franka PC:
 *******
 
 Navigate to the ``AAU_franka_moveit`` workspace, wherever you have located it.

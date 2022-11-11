@@ -4,9 +4,9 @@
 Needed equipment:
 #####
 
-    Franka PC
-    ROS PC
-    Interface PC
+    | Franka PC
+    | ROS PC
+    | Interface PC
 
 Packages used
 #####
@@ -21,18 +21,15 @@ From the ``AAU_franka_moveit`` repository::
 Description
 ######
 
-This tutorial briefly describe how to launch the barebone MoveIt pacakge that 
-allows us to control the Franka Robot, for which the rest of the codebase builds
-upon. It also launches an RVIZ gui which allows us to make some simple motion 
-commands.
+This tutorial describes how we can make the movements and trajectories that we
+did with the MoveIT GUI, but this time through code. We command the robot using
+MoveIt as before. The commands will originate from the **ROS PC** but be executed
+by the **Franka PC**. The communication between the **ROS PC** and the **Franka PC**
+happens via a ``ROS service``. The service server is hosted on the **Franka PC** 
+and the **ROS PC** runs the client which can make requests.
 
-We make use of two packages contained in the ``AAU_franka_moveit`` repository. The
-``ws_description`` contains various Xacro and URDF files which describes the
-workspace, and the relative transformations between the various objects. Anything
-not described here will not be known by the robot, and as such it might collide
-with whatever is not described. The ``panda_arm_moveit_config`` can go to various
-poses which can be predefined or defined here. The package can then compute a
-collision free trajectory and command the robot to execute said trajectory.
+The client can be coded in either ``C++`` or ``Python``, this tutorial is ``Python``
+only.
 
 For a overview of the system in this tutorial, see figure below.
 
@@ -52,7 +49,7 @@ Interface PC::
    2. Unlock brakes
    3. Activate FCI
 
-ROS PC:
+Franka PC:
 *******
 
 Navigate to the ``AAU_franka_moveit`` workspace, wherever you have located it.
@@ -68,6 +65,7 @@ Source the work environment::
 
 Launch the base moveit launch file::
 
-    roslaunch panda_arm_moveit_config bringup.launch
+    roslaunch panda_arm_moveit_config aau_bringup.launch
 
-You can now play around with moving the robot, remember to always use "plan and execute", otherwise it won't work for whatever reason.
+ROS PC:
+********
