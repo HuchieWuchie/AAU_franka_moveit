@@ -1,18 +1,6 @@
 Overview
 ===================================
 
-Contents
---------
-
-.. toctree::
-
-   index
-   usage
-   api
-
-Introduction
---------
-
 Welcome to the **AAU Franka** documentation. This documentation covers explains
 how to get started with the Franka development platform at AAU. The code base is
 meant to be run across several PCs. We define 3 PCs.
@@ -63,6 +51,20 @@ to be run on the **ROS PC**, it contains the following:
     * handoverLocation (Node for computing the x, y, z position of the receiver)
     * handoverOrientation (Node for computing proper object orientation for handover task)
     * sensors/camera (Utility node for communicating with intel Realsense sensors)
+
+
+The system is meant to be run on a multi-PC setup, where various computations
+are assigned to the different units. Processing of the sensor data happens on the
+**ROS PC**, which can be used to communicate where and when the physical robot 
+should move. The majority of the codebase and development is therefore meant to 
+happen on the **ROS PC**. Commanding the physical robot is done with the ``ROS`` 
+plugin called ``MoveIt``. Commanding the physical robot utilizes the ``libfranka``
+C++ plugin. ``libfranka`` requires a PC to run a real-time kernel, as such a
+second PC is required, this is the **Franka PC**. The **Franka PC** will not be 
+able to run any NVidia drivers or CUDA applications, since that software is not
+available in real-time systems. In order to communicate commands from the 
+**ROS PC** to the **Franka PC** a ROS service called ``moveitService`` has been 
+developed, which can be found in the AAU_franka_moveit repository.
 
 The rest of the documentation covers how to install and use the codebase.
 
