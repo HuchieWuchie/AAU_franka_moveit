@@ -41,8 +41,7 @@ You can access the robot with the following login information:
 
 .. note::
     Username: Panda
-
-    Password: panda1234
+    |Password: panda1234
 
 Franka PC: Installation
 ---------
