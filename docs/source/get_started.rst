@@ -40,7 +40,7 @@ accessing robot.franka.de from either Chrome or Firefox.
 
 You can access the robot with the following login information:
 
-::
+.. note::
     | Username: Panda
     | Password: panda1234
 
@@ -141,6 +141,7 @@ Install the following additional packages::
     sudo apt install python3-pip
 
 Install the following python packges::
+
     pip3 install rospkg
 
 Setup the ros workspace::
@@ -157,7 +158,65 @@ Setup the ros workspace::
    catkin_make
    source devel/setup.bash
 
+ROS PC: Installation
+---------
+
+Requirements
+######
+
+General system requirements::
+
+    CUDA version 11.6
+    NVIDIA GPU driver 510.60.02
+    ROS melodic
+    ros-melodic-moveit
+    ros-melodic-panda-moveit-config
+    ros-melodic-realsense2-description
+
+C++::
+
+    realsense2 # install from source
+    PCL (point cloud library) # Install from binary
+    OpenCV # Install from binary
+
+Python 3.6.9::
+
+    open3d 0.15.2
+    cv2 4.2.0
+    numpy 1.19.5
+    scipy 1.5.4
+    scikit_learn 0.24.2
+    torch (Pytorch) 1.10.2 cuda version
+    torchvision 0.11.2 cuda
+    scikit_image 0.17.2
+    PIL 8.4.0
+    rospkg 1.4.0
+
+The system ran on a Lenovo Thinkpad P53 laptop with a Quadro RTX 4000 GPU with 8 GB VRAM and an Intel Core i9-9880H CPU 2.3 GHZ and 32 GB RAM.
 
 
+Installation:
+########
+
+Setup the ros workspace::
+
+    mkdir ros_ws
+    mkdir ros_ws/src
+    cd ros_ws/src
+
+Git clone the required repositories::
+
+    git clone https://github.com/justagist/franka_panda_description.git
+    git clone https://github.com/HuchieWuchie/AAU_franka_moveit.git
+    git clone https://github.com/HuchieWuchie/franka_handover.git
+
+Make and build the repository::
+
+    cd ..
+    catkin_make
+    source devel/setup.bash
 
 
+Download pretrained weights from: https://drive.google.com/file/d/1psCn_aT5KUyQDJrdxqR7GJgHeCewGokS/view?usp=sharing
+
+Place and rename the weights file to ros_ws/src/affordanceAnalyzer/scripts/affordancenet/weights.pth
