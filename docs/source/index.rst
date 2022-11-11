@@ -68,4 +68,10 @@ developed, which can be found in the AAU_franka_moveit repository.
 
 The rest of the documentation covers how to install and use the codebase.
 
+.. toctree::
+
+   index
+   get_started
+   usage
+   api
 
