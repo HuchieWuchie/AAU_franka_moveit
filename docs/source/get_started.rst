@@ -162,20 +162,18 @@ To use Lumache, first install it using pip:
 
 Setup the ros workspace::
 
-    (.venv) $ pip install lumache
-    cd ~
-    mkdir ros_ws
-    mkdir ros_ws/src
-    cd ros_ws/src
-
-    git clone --branch melodic-devel https://github.com/frankaemika/franka_ros.git
-    git clone https://github.com/justagist/franka_panda_description.git
-    git clone --branch v0.7.1-dev https://github.com/justagist/franka_ros_interface.git
-    git clone https://github.com/HuchieWuchie/AAU_franka_moveit.git
-
-    cd ..
-    catkin_make
-    source devel/setup.bash
+   (.venv) $ pip install lumache
+   cd ~
+   mkdir ros_ws
+   mkdir ros_ws/src
+   cd ros_ws/src
+   git clone --branch melodic-devel https://github.com/frankaemika/franka_ros.git
+   git clone https://github.com/justagist/franka_panda_description.git
+   git clone --branch v0.7.1-dev https://github.com/justagist/franka_ros_interface.git
+   git clone https://github.com/HuchieWuchie/AAU_franka_moveit.git
+   cd ..
+   catkin_make
+   source devel/setup.bash
 
 
 
