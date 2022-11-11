@@ -40,7 +40,7 @@ accessing robot.franka.de from either Chrome or Firefox.
 
 You can access the robot with the following login information:
 
-.. note::
+::
     | Username: Panda
     | Password: panda1234
 
@@ -61,71 +61,64 @@ Build libfranka from source:
 The instructions are taken from here: https://frankaemika.github.io/docs/installation_linux.html
 Build libfranka from source, do not use the binary
 
-Remove  any existing installations
-```
-sudo apt remove "*libfranka*"
-```
+Remove  any existing installations::
 
-Install pre-requisites
-```
-sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
-```
+    sudo apt remove "*libfranka*"
 
-Clone and setup the installation folder
-```
-git clone --recursive https://github.com/frankaemika/libfranka # only for panda
-cd libfranka
-```
+Install pre-requisites::
 
-Create a build directory and run CMAKE
-```
-mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF ..
-cmake --build .
-```
+    sudo apt install build-essential cmake git libpoco-dev libeigen3-dev
 
-Build a debian package and install the debian package
-```
-cpack -G DEB
-sudo dpkg -i libfranka*.deb
-```
+
+Clone and setup the installation folder::
+
+    git clone --recursive https://github.com/frankaemika/libfranka # only for panda
+    cd libfranka
+
+
+Create a build directory and run CMAKE::
+
+    mkdir build && cd build
+    cmake -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=OFF ..
+    cmake --build .
+
+Build a debian package and install the debian package::
+
+    cpack -G DEB
+    sudo dpkg -i libfranka*.deb
 
 Build franka_ros from source:
 #########
 
-Setup the catkin workspace
-```
-cd ~
-mkdir -p franka_ros/src && cd franka_ros
-source /opt/ros/melodic/setup.sh
-catkin_init_workspace src
-```
+Setup the catkin workspace::
 
-Clone franka_ros github repository
-```
-git clone --recursive https://github.com/frankaemika/franka_ros src/franka_ros
-```
+    cd ~
+    mkdir -p franka_ros/src && cd franka_ros
+    source /opt/ros/melodic/setup.sh
+    catkin_init_workspace src
 
-Change version to melodic
-```
-git checkout melodic-devel
-```
+Clone franka_ros github repository::
+    
+    git clone --recursive https://github.com/frankaemika/franka_ros src/franka_ros
 
-Install missing dependencies
-```
-rosdep install --from-paths src --ignore-src --rosdistro melodic -y --skip-keys libfranka
-catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/build
-source devel/setup.sh
-```
+Change version to melodic::
+
+    git checkout melodic-devel
+
+Install missing dependencies::
+
+    rosdep install --from-paths src --ignore-src --rosdistro melodic -y --skip-keys libfranka
+    catkin_make -DCMAKE_BUILD_TYPE=Release -DFranka_DIR:PATH=/path/to/libfranka/build
+    source devel/setup.sh
 
 Install real-time patch:
 #########
 
-Setup a workspace
-```
-cd ~
-mkdir rt_patch && cd rt_patch
-```
+Setup a workspace::
+
+    cd ~
+    mkdir rt_patch && cd rt_patch
+
 
 Follow the instructions from here and install the RT patch for kernel version 5.4.19. Other patches might work as well, but bugs and problems have been encountered.
 
@@ -136,9 +129,8 @@ After having installed the pre-requisites on the Franka pc, the moveit package g
 
 **Install packages:**
 
-Install the following ros packages.
+Install the following ros packages::
 
-.. code-block:: console
     sudo apt install ros-melodic-moveit
     sudo apt install ros-melodic-panda-moveit-config
     sudo apt install ros-melodic-realsense2-description
@@ -149,20 +141,11 @@ Install the following additional packages
 .. code-block:: console
     sudo apt install python3-pip
 
-Install the following python packges
-
-.. code-block:: console
+Install the following python packges::
     pip3 install rospkg
-
-To use Lumache, first install it using pip:
-
-.. code-block:: console
-
-   (.venv) $ pip install lumache
 
 Setup the ros workspace::
 
-   (.venv) $ pip install lumache
    cd ~
    mkdir ros_ws
    mkdir ros_ws/src
