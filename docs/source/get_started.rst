@@ -138,25 +138,30 @@ After having installed the pre-requisites on the Franka pc, the moveit package g
 
 Install the following ros packages.
 
-```
-sudo apt install ros-melodic-moveit
-sudo apt install ros-melodic-panda-moveit-config
-sudo apt install ros-melodic-realsense2-description
-```
+.. code-block:: console
+    sudo apt install ros-melodic-moveit
+    sudo apt install ros-melodic-panda-moveit-config
+    sudo apt install ros-melodic-realsense2-description
+
 
 Install the following additional packages
 
-```
-sudo apt install python3-pip
-```
+.. code-block:: console
+    sudo apt install python3-pip
 
 Install the following python packges
 
-```
-pip3 install rospkg
-```
+.. code-block:: console
+    pip3 install rospkg
+
 
 **Setup the ros workspace:**
+
+To use Lumache, first install it using pip:
+
+.. code-block:: console
+
+   (.venv) $ pip install lumache
 
 .. code-block:: console
     cd ~
