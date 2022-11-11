@@ -69,6 +69,8 @@ developed, which can be found in the AAU_franka_moveit repository.
 The rest of the documentation covers how to install and use the codebase.
 
 .. toctree::
+   :maxdepth: 2
+   :caption: Contents:
 
    index
    get_started
