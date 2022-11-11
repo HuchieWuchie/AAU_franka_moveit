@@ -50,6 +50,12 @@ Franka PC: Installation
 NOTE!!! THE TUTORIAL IS WRITTEN FOR **UBUNTU 18.04** BUT 20.04 CAN ALSO WORK, BUT 
 YOU HAVE TO MAKE THE NECCESSARY CHANGES YOURSELF.
 
+Network settings:
+########
+
+    IP: 172.16.0.1
+    Netmask: 255.255.255.0
+
 Install ROS melodic:
 #########
 
@@ -160,6 +166,12 @@ Setup the ros workspace::
 
 ROS PC: Installation
 ---------
+
+Network settings:
+######
+
+    IP: 172.16.0.3
+    Netmask: 255.255.255.0
 
 Requirements
 ######

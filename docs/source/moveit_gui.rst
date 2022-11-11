@@ -40,14 +40,31 @@ For a overview of the system in this tutorial, see figure below.
 Step-by-step:
 ######
 
-Interface PC:
+Interface PC::
 *******
 
-    1. Connect to `robot.franka.de`
-    2. Unlock brakes
-    3. Activate FCI
+.. codeblock::
+
+   1. Connect to `robot.franka.de`
+   2. Unlock brakes
+   3. Activate FCI
 
 ROS PC:
 *******
 
-    
+Navigate to the ``AAU_franka_moveit`` workspace, wherever you have located it.
+
+Setup the ROS network parameters::
+
+    export ROS_IP=172.16.0.1
+    export ROS_MASTER_URI=http://172.16.0.1:11311
+
+Source the work environment::
+
+    source devel/setup.bash
+
+Launch the base moveit launch file::
+
+    roslaunch panda_arm_moveit_config bringup.launch
+
+You can now play around with moving the robot, remember to always use "plan and execute", otherwise it won't work for whatever reason.
