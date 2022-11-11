@@ -154,16 +154,15 @@ Install the following python packges
 .. code-block:: console
     pip3 install rospkg
 
-
-**Setup the ros workspace:**
-
 To use Lumache, first install it using pip:
 
 .. code-block:: console
 
    (.venv) $ pip install lumache
 
-.. code-block:: console
+Setup the ros workspace::
+
+    (.venv) $ pip install lumache
     cd ~
     mkdir ros_ws
     mkdir ros_ws/src
