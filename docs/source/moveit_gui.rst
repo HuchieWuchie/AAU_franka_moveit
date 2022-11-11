@@ -43,7 +43,7 @@ Step-by-step:
 Interface PC::
 *******
 
-.. codeblock::
+Perform the following steps on the Interface PC::
 
     1. Connect to `robot.franka.de`
     2. Unlock brakes

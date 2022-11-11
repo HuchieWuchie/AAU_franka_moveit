@@ -13,8 +13,10 @@ Packages used
 
 From the ``AAU_franka_moveit`` repository::
 
-    panda_arm_moveit_config # MoveIt configuration of the workspace
-    ws_description # Used by MoveIt to describe the physical workspace
+    **panda_arm_moveit_config** # MoveIt configuration of the workspace
+    **ws_description** # Used by MoveIt to describe the physical workspace
+    **moveitService** # Used to send goal poses for the robot from the ROS PC to the 
+    MoveIt package on the Franka PC. 
 
 Description
 ######
@@ -34,7 +36,7 @@ collision free trajectory and command the robot to execute said trajectory.
 
 For a overview of the system in this tutorial, see figure below.
 
-.. image:: images/moveit_gui.png
+.. image:: images/moveit_code.png
   :width: 800
   :alt: Alternative text
 
