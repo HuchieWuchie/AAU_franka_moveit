@@ -72,7 +72,7 @@ Install pre-requisites::
 
 Clone and setup the installation folder::
 
-    git clone --recursive https://github.com/frankaemika/libfranka # only for panda
+    git clone --recursive https://github.com/frankaemika/libfranka
     cd libfranka
 
 
@@ -120,7 +120,7 @@ Setup a workspace::
     mkdir rt_patch && cd rt_patch
 
 
-Follow the instructions from here and install the RT patch for kernel version 5.4.19. Other patches might work as well, but bugs and problems have been encountered.
+Follow the instructions from here https://frankaemika.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel and install the RT patch for kernel version 5.4.19. Other patches might work as well, but bugs and problems have been encountered.
 
 Install the AAU_franka_moveit repository:
 #########
@@ -136,9 +136,8 @@ Install the following ros packages::
     sudo apt install ros-melodic-realsense2-description
 
 
-Install the following additional packages
+Install the following additional packages::
 
-.. code-block:: console
     sudo apt install python3-pip
 
 Install the following python packges::
