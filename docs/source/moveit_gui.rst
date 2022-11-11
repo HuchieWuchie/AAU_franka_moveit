@@ -45,9 +45,9 @@ Interface PC::
 
 .. codeblock::
 
-   1. Connect to `robot.franka.de`
-   2. Unlock brakes
-   3. Activate FCI
+    1. Connect to `robot.franka.de`
+    2. Unlock brakes
+    3. Activate FCI
 
 ROS PC:
 *******
