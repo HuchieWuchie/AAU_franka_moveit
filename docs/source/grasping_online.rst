@@ -1,4 +1,4 @@
-4 Grasping offline
+4 Grasping online
 ===================================
 
 Needed equipment:
@@ -13,20 +13,6 @@ From the ``AAU_franka_moveit`` repository::
     **panda_arm_moveit_config** # MoveIt configuration of the workspace
     **ws_description** # Used by MoveIt to describe the physical workspace
     **moveitService** # Used to send goal poses for the robot from the ROS PC to the MoveIt package on the Franka PC.
-
-Description
-######
-
-This tutorial demonstrates how we can find some predefined poses to go to, and
-and then grasp an object. 
-The tutorial will at first show how we read the pose of the end-effector, when
-we have moved the robot to a certain configuration, once the end-effector pose 
-is saved, we can tell the robot to go there using the ``moveitService``.
-Finally we can command the robot to perform a grasp action. It is important to 
-understand, that we cannot simply call the ``moveit.gripperClose()`` function, 
-as that will mess with MoveIt, and we won't be able to open the gripper using the
-``moveitService``. Instead we have to use the ``moveit.Grasp()`` function.
-However, that function requires us to know the width which we want to grasp.
 
 For a overview of the system in this tutorial, see figure below.
 

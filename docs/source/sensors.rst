@@ -128,7 +128,9 @@ We can get the geometric point cloud information (no color)::
         o3d.visualization.draw_geometries([pcd])
 
 We can also get the color data associated with the point cloud, it comes as a list
-equal to the length of the list with geometric information::
+equal to the length of the list with geometric information. **NOTE:** The rgb
+information sometimes fails and you will instead get a grey point cloud, I have
+yet to fix that bug.::
 
         cloud, rgb = cam_robot.getPointCloudStatic()
         pcd = o3d.geometry.PointCloud()
