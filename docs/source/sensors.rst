@@ -175,7 +175,8 @@ Now declare a ROS topic and read from it for 1 second::
 The code:
 ######
 
-The full code is presented here::
+The full code is located at ``fh_handover/scripts/examples/demo_read_sensors.py``
+and presented here::
 
     #!/usr/bin/env python3
 
