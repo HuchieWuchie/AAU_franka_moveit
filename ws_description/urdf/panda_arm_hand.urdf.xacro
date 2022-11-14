@@ -234,14 +234,14 @@
     <link name="laser">
       <visual>
         <geometry>
-          <box size="0.06 0.06 0.06"/>
+          <box size="0.16 0.16 0.16"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0 0 0.0"/>
         <material name="aluminum_b"/>
       </visual>
       <collision>
         <geometry>
-          <box size="0.06 0.06 0.06"/>
+          <box size="0.16 0.16 0.16"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0 0 0.0"/>
       </collision>
@@ -279,14 +279,14 @@
     <link name="camera_shelf_">
       <visual>
         <geometry>
-          <box size="0.03 0.09 0.025"/>
+          <box size="0.2 0.2 0.2"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0 0 0"/>
         <material name="white"/>
       </visual>
       <collision>
         <geometry>
-          <box size="0.03 0.09 0.025"/>
+          <box size="0.2 0.2 0.2"/>
         </geometry>
         <origin rpy="0 0 0" xyz="0 0 0"/>
       </collision>

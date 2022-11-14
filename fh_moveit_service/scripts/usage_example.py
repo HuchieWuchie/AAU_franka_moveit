@@ -26,11 +26,13 @@ if __name__ == "__main__":
 
     print(moveit.getCurrentState())
 
+    exit()
+
     # Set planning parameters
     moveit.setMaxVelocityScalingFactor(0.2)
     moveit.setMaxAcceleratoinScalingFactor(0.2)
-    moveit.setPlanningTime(1.0)
-    moveit.setNumPlanningAttempts(25)
+    moveit.setPlanningTime(5.0)
+    moveit.setNumPlanningAttempts(50)
 
     # Control the gripper in a binary fashion
     moveit.gripperClose()
@@ -60,7 +62,7 @@ if __name__ == "__main__":
 
     success, trajectory = moveit.planToPose(pose)
     print("Found trajectory: ", success)
-    
+
     if success:
         moveit.executeTrajectory(trajectory)
 

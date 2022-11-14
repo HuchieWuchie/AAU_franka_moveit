@@ -5,6 +5,7 @@ import moveit_msgs
 import geometry_msgs
 from moveit_msgs.srv import GetPositionIK
 from moveit_msgs.msg import RobotTrajectory
+import fh_moveit_service.msg
 
 from fh_moveit_service.srv import moveitMoveToNamedSrv, moveitMoveToNamedSrvResponse
 from fh_moveit_service.srv import moveitPlanToNamedSrv, moveitPlanToNamedSrvResponse
