@@ -14,12 +14,12 @@ Packages used
 
 From the ``franka_handover`` repository::
 
-    | **sensors/camera** # ROS service for interfacing with D435 RGB-D camera
-    | **handoverLocation** # ROS service for getting estimated receiver position.
+    **sensors/camera** # ROS service for interfacing with D435 RGB-D camera
+    **handoverLocation** # ROS service for getting estimated receiver position.
 
 From other places::
 
-    | **urg_node** # A ROS node for reading from lidar scanner made by the manufacturer.
+    **urg_node** # A ROS node for reading from lidar scanner made by the manufacturer.
 
 
 Description
@@ -29,9 +29,9 @@ This tutorial describes how to read from the sensors associated with the robotic
 system, it also describes how to get the estimated position of the receiver.
 We read from the Intel Realsense D435 camera using a ROS service, that means that
 there is a server and a client. The server is written in C++ and can be found at
-**/sensors/camera/src/realsense_cpp_server.cpp**. The server is intended to get
+``/sensors/camera/src/realsense_cpp_server.cpp``. The server is intended to get
 synchronized data from the camera, it also has a ROS topic for getting a live 
-feed of the RGB data located at **/sensors/camera_robot/rgb**.
+feed of the RGB data located at ``/sensors/camera_robot/rgb``.
 In order to read from the URG lidar scanner we just make use of a ROS node 
 provided by the manufacturer. The URG node provides live data on ROS topics.
 
@@ -50,7 +50,7 @@ Interface PC::
 
 Perform the following steps on the Interface PC::
 
-    1. Connect to `robot.franka.de`
+    1. Connect to ``robot.franka.de``
     2. Unlock brakes
     3. Activate FCI
 
@@ -100,16 +100,16 @@ Start the ROS node::
 
 We have programmed a helper class for using the ROS service associated with the
 camera client. In this tutorial we are going to be interfacing with the 
-**camera_robot** mounted on the flange of the Franka robot. If you want to read 
+``camera_robot`` mounted on the flange of the Franka robot. If you want to read 
 from the camera mounted on the beam of the workstation you should replace the
-keyword **type** with **camera_shelf** when instantiating the **CameraClient** class.
+keyword ``type`` with ``camera_shelf`` when instantiating the ``CameraClient`` class.
 
-We initialize the **CameraClient**::
+We initialize the ``CameraClient``::
     
         cam_robot = CameraClient(type = "camera_robot")
 
-The camera only updates information when it is told to **captureNewScene()**
-that means you can always read data at the time when **captureNewScene** was called::
+The camera only updates information when it is told to ``captureNewScene()``
+that means you can always read data at the time when ``captureNewScene`` was called::
 
         cam_robot.captureNewScene()
 
@@ -162,7 +162,7 @@ Make a callback function::
         print(angle_min)
         print(angle_increment)
 
-Now declare a ROS topic and read from it for 5 seconds::
+Now declare a ROS topic and read from it for 1 second::
 
         rospy.Subscriber("/sensors/lidar/scan", LaserScan, laserscanCallback)
         i = 0
