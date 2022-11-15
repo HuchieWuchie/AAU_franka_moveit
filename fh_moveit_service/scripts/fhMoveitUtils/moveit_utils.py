@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import rospy
+import actionlib
 
 import moveit_msgs
 import geometry_msgs
@@ -21,6 +22,32 @@ from fh_moveit_service.srv import moveitSetMaxAccSrv, moveitSetMaxAccSrvResponse
 from fh_moveit_service.srv import moveitSetMaxVelSrv, moveitSetMaxVelSrvResponse
 from fh_moveit_service.srv import moveitSetPlanningTimeSrv, moveitSetPlanningTimeSrvResponse
 from fh_moveit_service.srv import moveitNumPlanningAttemptsSrv, moveitNumPlanningAttemptsSrvResponse
+
+import franka_gripper.msg
+
+def grasp(width, force = 1.0, speed = 0.01, epsilon_inner = 0.005, epsilon_outer = 0.005):
+    """
+    Input:  width:          -   in meters
+            force:          -   in Newtons
+            speed:          -   m/s
+            epsilon_inner:  -   error inner in meters
+            epsilon_outer:  -   error outer in meters
+    """
+
+    grasp_msg = franka_gripper.msg.GraspActionGoal()
+
+    grasp_msg.goal.width = width
+    grasp_msg.goal.force = force
+    grasp_msg.goal.speed = speed
+    grasp_msg.goal.epsilon.inner = epsilon_inner
+    grasp_msg.goal.epsilon.outer = epsilon_outer
+
+    # Send and execute
+    grasp_client = actionlib.SimpleActionClient("/franka_gripper/grasp", franka_gripper.msg.GraspAction)
+
+    grasp_client.wait_for_server()
+    grasp_client.send_goal(grasp_msg.goal)
+    grasp_client.wait_for_result()
 
 def setMaxAcceleratoinScalingFactor(val: float):
     rospy.wait_for_service("/fh_handover/moveit/set_max_acceleration_scaling_factor")

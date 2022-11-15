@@ -30,9 +30,9 @@ system, it also describes how to get the estimated position of the receiver.
 We read from the Intel Realsense D435 camera using a ROS service, that means that
 there is a server and a client. The server is written in C++ and can be found at
 ``/sensors/camera/src/realsense_cpp_server.cpp``. The server is intended to get
-synchronized data from the camera, it also has a ROS topic for getting a live 
+synchronized data from the camera, it also has a ROS topic for getting a live
 feed of the RGB data located at ``/sensors/camera_robot/rgb``.
-In order to read from the URG lidar scanner we just make use of a ROS node 
+In order to read from the URG lidar scanner we just make use of a ROS node
 provided by the manufacturer. The URG node provides live data on ROS topics.
 
 For a overview of the system in this tutorial, see figure below.
@@ -69,7 +69,7 @@ Launch the ROS services using this launch file::
 
     roslaunch fh_handover fh_sensor_tutorial.launch
 
-Run the example code::
+In another terminal run the example code::
 
     rosrun fh_handover demo_read_sensors.py
 
@@ -99,13 +99,13 @@ Start the ROS node::
         rate = rospy.Rate(5)
 
 We have programmed a helper class for using the ROS service associated with the
-camera client. In this tutorial we are going to be interfacing with the 
-``camera_robot`` mounted on the flange of the Franka robot. If you want to read 
+camera client. In this tutorial we are going to be interfacing with the
+``camera_robot`` mounted on the flange of the Franka robot. If you want to read
 from the camera mounted on the beam of the workstation you should replace the
 keyword ``type`` with ``camera_shelf`` when instantiating the ``CameraClient`` class.
 
 We initialize the ``CameraClient``::
-    
+
         cam_robot = CameraClient(type = "camera_robot")
 
 The camera only updates information when it is told to ``captureNewScene()``
@@ -138,19 +138,19 @@ yet to fix that bug.::
         pcd.colors = o3d.utility.Vector3dVector(rgb)
         o3d.visualization.draw_geometries([pcd])
 
-If you want to find the depth information of a certain pixel you need to make 
+If you want to find the depth information of a certain pixel you need to make
 use of the UV information, you can get the UV information like this::
 
         uv_data = cam_robot.getUvStatic()
 
-We can get the estimated receiver position by doing a coarse median filter of 
+We can get the estimated receiver position by doing a coarse median filter of
 the lidar scan data::
 
         locClient = LocationClient()
         location = locClient.getLocation()
         print(location)
 
-If you want access to the live feed from the URG lidar scanner, read from the 
+If you want access to the live feed from the URG lidar scanner, read from the
 ROS topic.
 
 Make a callback function::
@@ -258,4 +258,3 @@ and presented here::
         while i < 5:
             rate.sleep()
             i += 1
-        

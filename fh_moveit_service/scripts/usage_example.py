@@ -26,8 +26,6 @@ if __name__ == "__main__":
 
     print(moveit.getCurrentState())
 
-    exit()
-
     # Set planning parameters
     moveit.setMaxVelocityScalingFactor(0.2)
     moveit.setMaxAcceleratoinScalingFactor(0.2)

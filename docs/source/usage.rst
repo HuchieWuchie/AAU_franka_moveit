@@ -7,5 +7,5 @@ Example code
    moveit_gui
    moveit_code
    sensors
-   grasping
+   grasping_offline
    handover
